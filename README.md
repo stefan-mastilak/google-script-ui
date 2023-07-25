@@ -24,4 +24,4 @@ on the email addres of the person viewing the UI. </p>
 <img src="https://user-images.githubusercontent.com/74961891/234194401-204752df-523a-4684-b804-bd5623cb7b2c.png">
 
 <h2>User Interface</h2><br>
-<img src="https://github.com/stefan-mastilak/google-script-ui/assets/74961891/15a798aa-1c38-4aab-9d7a-85dc925fd59d">
+<img src="https://github.com/stefan-mastilak/google-script-ui/assets/74961891/2d2422a5-1717-4984-8be7-5966e0f49f56">
