@@ -4,9 +4,6 @@
 <p>Google App script web UI for showing filtered invoice data based obtained from google spreadsheet. Access is restricted based 
 on the email addres of the person viewing the UI. </p>
 
-<h2>Documentation</h2><br>
-<li>Confluence: https://confluence.visma.com/pages/viewpage.action?pageId=597388390</li>
-
 <h2>Data source</h2>
 <li>Protected Google Spreadsheet</li>
 <li>Link: to be added here</li>
