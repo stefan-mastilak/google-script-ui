@@ -6,7 +6,6 @@ on the email addres of the person viewing the UI. </p>
 
 <h2>Data source</h2>
 <li>Protected Google Spreadsheet</li>
-<li>Link: to be added here</li>
 
 <h2>Project structure:</h2><br>
 <li><b>css.html</b>- stylesheet </li>
