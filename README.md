@@ -16,11 +16,9 @@ on the email addres of the person viewing the UI. </p>
 
 <h2>Deployment details:</h2><br>
 <li><b>Platform:</b> Googe Cloud Platform</li>
-<li><b>Owner</b>: invoice.robot@visma.com</li>
-<li><b>Uer Interface URL</b>: https://script.google.com/a/macros/visma.com/s/AKfycbw-AxASHpQS2KH5EfrXftQ-AtLXYj1CEP7UuljyVBfvHU8rbNfHOilVYN8dII_OAK7iNA/exec</li>
 
 <h2>Business process</h2><br>
-<li>Operations team (Visma Software Romania HR team)</li>
+<li>Operations team</li>
 <li>Spreadsheet storing invoice data (datasource)</li>
 <li>Web interface</li>
 <li>Authenticated user</li><br>
@@ -28,8 +26,6 @@ on the email addres of the person viewing the UI. </p>
 
 
 <h2>Process flow</h2><br>
-<li>NOTE: VOM api integration was created via app created in Visma developer portal 
-<li>Application ID: invoice_details_to_pms (Product code: 426 RPA)</li><br>
 <img src="https://user-images.githubusercontent.com/74961891/234194500-1e08dcfa-0e18-473a-aa8f-40429a8e9061.png">
 
 
