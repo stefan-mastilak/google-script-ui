@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <base target="_top">
+      <?!= include('css'); ?>
+
+      <!-- Bootstrap CSS CDN -->
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+      integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+
+      <!-- Font Awesome JS -->
+      <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
+      integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+      <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
+      integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+      <meta name="description" content="" />
+      <meta name="author" content="" />
+      <title>AutoMate Invoice viewer</title>
+
+      <!-- Favicon-->
+      <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+      <script src="https://cdn.jsdelivr.net/gh/linways/table-to-excel@v1.0.4/dist/tableToExcel.js"></script>
+
+      <!-- Excel like table filters-->
+      <script src="excel-bootstrap-table-filter-bundle.js"></script>
+      <link rel="stylesheet" href="excel-bootstrap-table-filter-style.css">
+
+      <!-- Datatables -->
+      <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.13.1/datatables.min.css" />
+      <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.13.1/datatables.min.js"></script>
+
+      <!-- Export table as excel -->
+      <script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
+
+      <!-- jquery -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+    </head>
+    <body>
+
+      <script>
+          $('body').append('<div style = "" id = "indicator"> <div class="loader"> </div> </div>');
+          $(window).on('load', function () {
+            setTimeout(removeLoader, 5000);
+          });
+          function removeLoader() {
+            $("#indicator").fadeOut(2000, function () {
+                $("#indicator").remove();
+            });
+          }
+      </script>
+
+        <div class="d-flex" id="wrapper">
+            <!-- Sidebar-->
+            <div class="border-end bg-white" id="sidebar-wrapper">
+                <div class="sidebar-heading border-bottom bg-light"><h4 class="light" style="margin-top: 14px; margin-bottom: 13px; margin-left: 10px; color: #495057">Actions</h4></div>
+                <div class="list-group list-group-flush">
+                  <div class="controls" style="padding: 25px">
+                    <a class="list-group-item list-group-item-action list-group-item-dark p-3" onclick=""
+                    style="cursor: pointer; border-radius: 10px; margin-bottom: 20px;" id="download-modal-btn"><b>Download Report</b></a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" onclick=""
+                    style="cursor: pointer; border-radius: 10px; margin-bottom: 20px;" id="cols-modal-btn"><b>Columns Description</b></a>
+                    <a class="list-group-item list-group-item-action list-group-item-dark p-3" onclick=""
+                    style="cursor: pointer; border-radius: 10px; margin-bottom: 20px;" id="modal-btn"><b>Help</b></a>
+
+                      <!-- Download report modal -->
+                        <div id="download-modal" class="modal">
+                          <div id="download-modal-content" class="modal-content">
+                            <div class="modal-header text-center d-block">
+                              <h2 id="contactUsHeading">Download Report</h2>
+                              <span class="close" id="downloadClose">&times;</span>
+                            </div>
+                            <div class="modal-body">
+                              <br>
+                              <p>Do you want to download report as excel file?</p>
+                              <button id="yesDownload" onclick="exportReportToExcel(this)">Yes
+                              <button id="closeDownloadModal" onclick="closeDownloadModal()">No
+                              <br>
+                            </div>
+                          </div>
+                        </div>
+
+                      <!-- Contact form modal -->
+                        <div id="my-modal" class="modal">
+                          <div id="my-modal-content" class="modal-content">
+                            <div class="modal-header text-center d-block">
+                              <h2 id="contactUsHeading">Contact Us</h2>
+                              <span class="close" id="close">&times;</span>
+                            </div>
+                            <div class="modal-body">
+                              <br>
+                              <p>If there's any problem, please contact us:</p>
+                              <p><b>alexandra.ciupe@visma.com</b></p>
+                              <p><b>stefan.mastilak@visma.com</b></p>
+                              <br>
+                              <button id="closeHelpModal" onclick="closeModal()">Close
+                            </div>
+                          </div>
+                        </div>
+
+                      <!-- Cols descrition modal -->
+                        <div id="cols-modal" class="modal">
+                          <div id="cols-modal-content" class="modal-content">
+                            <div class="modal-header text-center d-block">
+                              <h2 id="contactUsHeading">Columns Description</h2>
+                              <span class="close" id="colsClose">&times;</span>
+                            </div>
+
+                            <div class="modal-body">
+                              <table class="table-bordered" style="text-align: left">
+                                <tr>
+                                  <th>Column</th>
+                                  <th>Description</th>
+                                </tr>
+                                <tr>
+                                  <td><b>Internal code</b></td>
+                                  <td>Unique code assigned for each employee in the invoicing process for SwRO to avoid any display of VOM ID and name on the invoice and specification</td>
+                                </tr>
+                                <tr>
+                                  <td><b>Project name</b></td>
+                                  <td>Project code plus description of the product as per hours booked by employee</td>
+                                </tr>
+                                <tr>
+                                  <td><b>FTE</b></td>
+                                  <td>Based on standard working hours from VOM</td>
+                                </tr>
+                                <tr>
+                                  <td><b>Productive hours product</b></td>
+                                  <td>Hours booked by employee in Jira/Tripletex system for a certain product in the invoiced month before deadline (last working day of the month)</td>
+                                </tr>
+                                <tr>
+                                  <td><b>Productive hours total</b></td>
+                                  <td>Total productive hours (except admin, vacation) booked by the employee in the invoiced month before the deadline</td>
+                                </tr>
+                                <tr>
+                                  <td><b>Work load product</b></td>
+                                  <td>Productive hours on a certain product out of all booked productive hours</td>
+                                </tr>
+                                <tr>
+                                  <td><b>Customer IP owner</b></td>
+                                  <td>For employees working on products, should be the IP Owner of the product. There might be exceptions</td>
+                                </tr>
+                                <tr>
+                                  <td><b>Invoicing type</b></td>
+                                  <td>No project - full resource cost invoiced based on Working for legal unit field in VOM, no split per product lines
+Project based - resource cost is split per products and IP Owners</td>
+                                </tr>
+                                <tr>
+                                  <td><b>True up untaken vacation</b></td>
+                                  <td>Cost difference related to untaken vacations between the balance at current year end and previous year end - will be used only in December</td>
+                                </tr>
+                              </table>
+
+                              <br>
+                              <button id="closeDescModal" onclick="closeDescModal()">Close
+                            </div>
+                          </div>
+                        </div>
+                  </div>
+                </div>
+            </div>
+            <!-- Page content wrapper-->
+            <div id="page-content-wrapper">
+                <!-- Top navigation-->
+                <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                    <div class="container-fluid">
+                        <h1 style="margin-bottom: 10px; margin-top: 10px; color: #495057">Invoice data overview</h1>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
+                                <li class="nav-item"><a class="nav-link"><h4 class="light" id='currentUser' style="color: #17a2b8; margin-bottom: 0;"></h4></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+                <!-- Page content-->
+                <div class="container-fluid">
+                    <div class="col s12">
+                      <input type="text" id="searchInput" autocomplete="off" class="form-control searchBox-input js-searchBox-input" onkeyup="searchInTable()"
+                      placeholder="Search in table..." size="100%" style="margin-bottom: 20px; margin-top: 26px" onkeydown="onkeypressed(event, this);"
+                      title="Click to search in the entire table based on the input keywords match">
+                        <div style="overflow: auto;" id='dataTable'>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="footer" align="center" style="flex-grow: 1;">
+                      <!-- <img src="https://www.vildika.com/wp-content/uploads/visma-logo-png-transparent-small.png" class="center" width="200"/> -->
+                      <img src="https://drive.google.com/uc?id=1d-UwfzInPGzGhAKfMdqqJTloP3Da1Mew" style="margin-bottom: 10px">
+                      <p class="mb-1" align="center" style="margin-top:10px">&copy; 2023 Visma AutoMate Finance</p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+      <!-- Bootstrap core JS-->
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+      <!-- Core theme JS-->
+      <script src="js/scripts.js"></script>
+      <?!= include('javascript'); ?>
+      <script type="text/javascript"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    </body>
+</html>

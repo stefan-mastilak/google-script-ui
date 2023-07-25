@@ -1,0 +1,10 @@
+.idea
+.pyc
+**.pickle
+**.json
+**.log
+**.xlsx
+/lp_pwd.txt
+/vom_api_connector.py
+**.pub
+__pycache__/
