@@ -40,14 +40,18 @@
 
     </head>
     <body>
-
+      <!-- cookies -->
+      <script>
+        document.cookie = "AC-C=ac-c;expires=Fri, 31 Dec 9999 23:59:59 GMT;path=/;SameSite=Strict";
+      </script>
+      <!-- loading spinner -->
       <script>
           $('body').append('<div style = "" id = "indicator"> <div class="loader"> </div> </div>');
           $(window).on('load', function () {
-            setTimeout(removeLoader, 5000);
+            setTimeout(removeLoader, 8000);
           });
           function removeLoader() {
-            $("#indicator").fadeOut(2000, function () {
+            $("#indicator").fadeOut(8000, function () {
                 $("#indicator").remove();
             });
           }
@@ -56,7 +60,7 @@
         <div class="d-flex" id="wrapper">
             <!-- Sidebar-->
             <div class="border-end bg-white" id="sidebar-wrapper">
-                <div class="sidebar-heading border-bottom bg-light"><h4 class="light" style="margin-top: 14px; margin-bottom: 13px; margin-left: 10px; color: #495057">Actions</h4></div>
+                <div class="sidebar-heading border-bottom bg-light"><h4 class="light" style="margin-top: 13px; margin-bottom: 13px; margin-left: 10px; color: #495057">Actions</h4></div>
                 <div class="list-group list-group-flush">
                   <div class="controls" style="padding: 25px">
                     <a class="list-group-item list-group-item-action list-group-item-dark p-3" onclick=""
@@ -167,12 +171,12 @@ Project based - resource cost is split per products and IP Owners</td>
                 <!-- Top navigation-->
                 <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
                     <div class="container-fluid">
-                        <h1 style="margin-bottom: 10px; margin-top: 10px; color: #495057">Invoice data overview</h1>
+                        <h2 style="margin-bottom: 15px; margin-top: 14px; color: #495057">Invoice data overview</h2>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
-                                <li class="nav-item"><a class="nav-link"><h4 class="light" id='currentUser' style="color: #17a2b8; margin-bottom: 0;"></h4></a></li>
+                                <li class="nav-item"><a class="nav-link"><h4 class="light" id='currentUser' style="color: #007aca; margin-bottom: 0;"></h4></a></li>
                             </ul>
                         </div>
                     </div>

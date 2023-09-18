@@ -7,4 +7,5 @@
 /lp_pwd.txt
 /vom_api_connector.py
 **.pub
+**.DS_Store
 __pycache__/
